@@ -4,7 +4,7 @@ Paper: "A Multi-Stage Fine-tuning-based Method for Low-resource Cross-lingual Su
 ## How to use
 At present, the unorganized code is published first, and we will publish the organized code in the near future. There are some parameters and code segments that are not related to this work in the code we uploaded so far (it is a code segment for another study). The steps are as follows:
 
-## Rerequisite:
+## Dependencies:
 ```
 python 3.10
 pytorch 1.13.1
