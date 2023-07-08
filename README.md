@@ -14,7 +14,7 @@ pytorch-lightning 1.9.4
 
 ## Training or test model:
 ```
-python mbart_base/src/main.py --config mbart_base/src/config/config.yaml
+python main.py --config config/config.yaml
 ```
 Modify the parameters in the 'mbart_base/src/config/config.yaml‘ file to perform two-stage training
 
