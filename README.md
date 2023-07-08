@@ -16,7 +16,8 @@ pytorch-lightning 1.9.4
 ```
 python mbart_base/src/main.py --config config/config.yaml
 ```
-Modify the parameters in the 'mbart_base/src/config/config.yaml‘ file to perform two-stage training\n
+Modify the parameters in the 'mbart_base/src/config/config.yaml‘ file to perform two-stage training
+
 Stage 1:
 ```
 checkpoint: None
@@ -30,5 +31,6 @@ is_dd: True
 loss_type: 48
 r: 2.0
 ```
-More details in the comments in the config.yaml file\n
+More details in the comments in the config.yaml file
+
 There are some useless configuration parameters and code segments in the code, but this will not affect the training of the model. We will delete these irrelevant code segments and configuration parameters that affect reading as soon as possible
