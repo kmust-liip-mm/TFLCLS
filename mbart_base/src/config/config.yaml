@@ -1,0 +1,87 @@
+# Basic Config,
+mode: train
+checkpoint: None #In the translation fine-tuning stage, this setting is None. In the second stage, it needs to be set to the savepoint path obtained in the first stage. When testing the model it is set to the final checkpoint path
+continue_train: False #abandoned
+is_prompt: False #abandoned
+is_peft_prompt: False #abandoned
+is_prefix: False #abandoned
+is_lora: False #abandoned
+is_dd: False #Note that when the ch2en_mode parameter selects dd_summary, this needs to be switched to True
+lora_r: 32 #abandoned
+lora_alpha: 32 #abandoned
+lora_dropout: 0.1 #abandoned
+lora_bias: lora_only # 'lora_only', 'all' or 'lora_only'
+prompt_token_num: 20  #abandoned
+train_dataset_length: 5000  #1000, 3000, 5000
+val_dataset_length: -1
+test_dataset_length: -1
+ch2en_mode: translate #translate or summary or cls_summary or dd_summary
+loss_type: 48 #45 HU, 46 RHU, 48 ours.   47 and 49 were abandoned
+r: 2.0
+is_ft_peft: False #abandoned
+is_setAllturn: False #abandoned
+
+#Generate Config
+no_repeat_ngram_size: 3
+max_output_len: 128
+num_beams: 4
+
+# Dataloader Config
+dataset_path: dataset/ch2en/
+batch_size: 4
+val_batch_size: 4
+test_batch_size: 16
+num_workers: 3
+
+# Log Config
+log_name: pref_mbart_bart
+val_save_file: ./evaluation/temp_valid_file
+test_save_file: ./evaluation/results/test_summaries.txt
+
+# Datamodule Config
+# Tokenizer
+src_lang: vi_VN
+tgt_lang: zh_CN
+sent_token_len: 768
+ref_token_len: 128
+#add_special_tokens: True
+truncation: True
+padding: max_length #max_length
+return_tensors: pt
+ignore_pad_token_for_loss: True
+#is_longest: True
+# collate fn
+sent_lower_case: True
+mm_lower_case: True
+
+# Model Config    model_version:facebook/bart-base / other bart model
+model_name_or_path: facebook/mbart-large-cc25
+
+# Optimizer Config
+# Adam / AdamW / Adafactor
+optimizer: AdamW
+learning_rate: 0.00005
+scheduler_lambda1: 1     #change the learning each lambda1 epoch
+scheduler_lambda2: 0.95   #the learning rate will times lambda2 for each change
+weight_decay: 0
+
+# Trainer Config
+random_seed: 0
+train_params:
+  accelerator: gpu
+  auto_lr_find: False
+  auto_scale_batch_size: False
+  auto_select_gpus: False
+  deterministic: True
+  max_steps: -1
+  max_epochs: 10
+  num_sanity_val_steps: 10
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+  limit_test_batches: 1.0
+  accumulate_grad_batches: 4
+  gradient_clip_val: 1.0
+  benchmark: False
+  #weights_summary: top
+  val_check_interval: 1.0
+  default_root_dir: ./log_lightning/
